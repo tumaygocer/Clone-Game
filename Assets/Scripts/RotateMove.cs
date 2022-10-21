@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class RotateMove : MonoBehaviour
 {
-    public float rotateSpeed;
-    private float moveX;
-   
-
+    public bool isActive = false;
   
     void Update()
     {
-        if (Input.touchCount == 0) return;
-        HandleInput();
-    }
-    void HandleInput()
-    {
-        Touch finger = Input.GetTouch(0);
-
-        if (finger.deltaPosition.x > 60.0f && finger.deltaPosition.x < -60.0f)
+        if (isActive)
         {
-            transform.Rotate(0f, moveX * rotateSpeed * Time.deltaTime, 0f);
-        }
+            if (Input.touchCount == 1)
+            {
+                Touch screenTouch = Input.GetTouch(0);
 
-       
+                if (screenTouch.phase == TouchPhase.Moved)
+                {
+                    transform.Rotate(0f, screenTouch.deltaPosition.x, 0f);
+                }
+                if (screenTouch.phase == TouchPhase.Ended)
+                {
+                    isActive = false;
+                }
+            }
+        }
     }
+   
 
 }
