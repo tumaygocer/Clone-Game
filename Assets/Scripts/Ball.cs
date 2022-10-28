@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
     public Rigidbody _rigidbody;
     public float jumpForce;
+    public GameObject splashParticle;
     void Start()
     {
         
@@ -21,6 +22,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("cylinder"))
         {
+            Instantiate(splashParticle, transform.position, transform.rotation);
             _rigidbody.AddForce(Vector3.up * jumpForce);
         }
         else
