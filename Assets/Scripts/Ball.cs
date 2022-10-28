@@ -19,6 +19,15 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        _rigidbody.AddForce(Vector3.up * jumpForce);
+        if (collision.gameObject.CompareTag("cylinder"))
+        {
+            _rigidbody.AddForce(Vector3.up * jumpForce);
+        }
+        else
+        {
+            Debug.Log("Game Over");
+        }
+       
+       
     }
 }
