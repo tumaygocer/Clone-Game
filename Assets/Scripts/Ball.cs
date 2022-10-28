@@ -22,7 +22,8 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("cylinder"))
         {
-            Instantiate(splashParticle, transform.position, transform.rotation);
+            GameObject Splash = Instantiate(splashParticle, transform.position, transform.rotation);
+            Splash.transform.parent = collision.gameObject.transform;
             _rigidbody.AddForce(Vector3.up * jumpForce);
         }
         else
